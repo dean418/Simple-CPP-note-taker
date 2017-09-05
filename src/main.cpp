@@ -2,7 +2,7 @@
 #include <fstream>
 #include <cstring>
 #include <string>
-#include <stdio.h>
+#include <cstdio>
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main () {
 	string selection; //variable to store a, b or c depending on users input 
 	string Read;
 	
-	cout << "C++ note taking.\n" << "Would you like to: (Type a, b or c to choose an option)\n\n" << "a) Make a new file.\nb) List all files.\nc) View a file.\n" << endl; 
+	cout << "C++ note taking.\n" << "Would you like to: (Type a, b, c or d to choose an option)\n\n" << "a) Make a new file.\nb) List all files.\nc) View a file.\nd) delete a file." << endl; 
 	cin >> selection; // storing the users input in the "selection" variable
 
 	while (selection != "a" && selection != "b" && selection != "c" && selection != "d") { // loop until the user enters a valid letter
@@ -86,6 +86,22 @@ int main () {
 			
 		} else {
 			cout << "The file you are trying to view does not exist!" << endl; //error
+		}
+	} else if (selection == "d") {
+		
+		string fileToDelete;
+		
+		cout << "Enter the name of the file that you would like to delete." << endl;
+		cin >> fileToDelete;
+		
+		ifstream Delete(fileToDelete);
+		
+		if (Delete.is_open()) {
+			Delete.close();
+			
+			if(remove(fileToDelete.c_str()) != 0) {
+				cout << "file deleted" << endl;
+			}
 		}
 	}
 		string answer;
